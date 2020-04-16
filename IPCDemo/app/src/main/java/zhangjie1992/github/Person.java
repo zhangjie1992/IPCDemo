@@ -1,4 +1,4 @@
-package zhangjie1992.github.bean;
+package zhangjie1992.github;
 
 import android.os.Parcel;
 import android.os.Parcelable;

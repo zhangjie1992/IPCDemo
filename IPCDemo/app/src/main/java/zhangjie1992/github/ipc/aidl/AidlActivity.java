@@ -9,12 +9,11 @@ import android.os.IBinder;
 import android.os.RemoteException;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 
 import java.util.List;
 
 import androidx.appcompat.app.AppCompatActivity;
-import zhangjie1992.github.bean.Person;
+import zhangjie1992.github.Person;
 import zhangjie1992.github.ipc.ILeoAidl;
 import zhangjie1992.github.ipc.R;
 
@@ -22,9 +21,6 @@ public class AidlActivity extends AppCompatActivity {
     private final static String TAG = "MainActivity";
 
     private ILeoAidl iLeoAidl;
-
-    private Button btn;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,8 +32,19 @@ public class AidlActivity extends AppCompatActivity {
     }
 
     private void initView() {
-        btn = (Button) findViewById(R.id.but_click);
-        btn.setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.btn_add).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                try {
+                    int add = iLeoAidl.add(1, 2);
+                    Log.e(TAG, "add:" + add);
+                } catch (RemoteException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+
+        findViewById(R.id.btn_add_person).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 try {
@@ -53,7 +60,9 @@ public class AidlActivity extends AppCompatActivity {
 
     private void bindService() {
         Intent intent = new Intent();
-        intent.setComponent(new ComponentName("zhangjie1992.github.ipcservice", "zhangjie1992.github.ipc.aidl.LeoAidlService"));
+//        intent.setComponent(new ComponentName("zhangjie1992.github.ipcservice", "zhangjie1992.github.ipc.aidl.LeoAidlService"));
+        //todo 这里整错了，全类名啊
+        intent.setComponent(new ComponentName("zhangjie1992.github.ipcservice", "zhangjie1992.github.ipcservice.aidl.AidlDemoService"));
         bindService(intent, connection, Context.BIND_AUTO_CREATE);
     }
 
@@ -77,5 +86,6 @@ public class AidlActivity extends AppCompatActivity {
         super.onDestroy();
         unbindService(connection);
     }
+
 
 }

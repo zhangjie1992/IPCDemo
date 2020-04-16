@@ -1,11 +1,12 @@
-package zhangjie1992.github.ipc;
+package zhangjie1992.github.ipcservice;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
-import zhangjie1992.github.ipc.aidl.AidlActivity;
+import zhangjie1992.github.ipcservice.aidl.AidlActivity;
+import zhangjie1992.github.ipcservice.R;
 
 public class MainActivity extends AppCompatActivity {
 
